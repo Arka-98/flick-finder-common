@@ -1,0 +1,51 @@
+{
+  "name": "@flick-finder/common",
+  "version": "1.0.1",
+  "description": "Nest common utilities library for Flick Finder microservices",
+  "main": "dist/index.js",
+  "keywords": [
+    "flick-finder",
+    "common",
+    "nest",
+    "microservices"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "format": "prettier --write .",
+    "check-format": "prettier --check .",
+    "check-exports": "attw --pack .",
+    "lint": "tsc",
+    "ci": "npm run build && npm run check-format && npm run check-exports",
+    "local-release": "changeset version && changeset publish",
+    "prepublishOnly": "npm run ci"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arka-98/flick-finder-common.git"
+  },
+  "type": "module",
+  "author": "Arkadipta Das",
+  "license": "MIT",
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.16.4",
+    "@changesets/cli": "^2.27.9",
+    "@types/express": "^5.0.0",
+    "prettier": "^3.3.3",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@nestjs/common": "^10.4.7",
+    "@nestjs/config": "^3.3.0",
+    "@nestjs/core": "^10.4.7",
+    "@nestjs/jwt": "^10.2.0",
+    "@types/mongoose": "^5.11.97",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.1"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  }
+}
