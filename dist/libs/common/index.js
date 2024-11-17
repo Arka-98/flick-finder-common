@@ -88,6 +88,7 @@ import {
   Injectable as Injectable3
 } from "@nestjs/common";
 import "@nestjs/core";
+import "rxjs";
 
 // libs/common/src/decorators/roles.decorator.ts
 import { SetMetadata as SetMetadata2 } from "@nestjs/common";
