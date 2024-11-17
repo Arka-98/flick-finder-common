@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.2.3
+
+### Patch Changes
+
+- 1a4f3af: Use factory method in module for DI
+
 ## 1.2.2
 
 ### Patch Changes
