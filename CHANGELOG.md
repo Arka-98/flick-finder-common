@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.2.0
+
+### Minor Changes
+
+- 3693c56: Fix build issues
+
 ## 1.1.1
 
 ### Patch Changes
