@@ -1,7 +1,5 @@
-declare class CommonModule {
-}
+declare class CommonModule {}
 
-declare class CommonService {
-}
+declare class CommonService {}
 
 export { CommonModule, CommonService };
