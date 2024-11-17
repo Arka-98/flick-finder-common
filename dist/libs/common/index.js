@@ -21,7 +21,7 @@ CommonService = __decorateClass([
 ], CommonService);
 
 // libs/common/src/common.module.ts
-import { APP_GUARD } from "@nestjs/core";
+import { APP_GUARD, Reflector as Reflector3 } from "@nestjs/core";
 
 // libs/common/src/guards/auth.guard.ts
 import {
@@ -117,14 +117,19 @@ RoleGuard = __decorateClass([
 ], RoleGuard);
 
 // libs/common/src/common.module.ts
+import { ConfigService as ConfigService2 } from "@nestjs/config";
+import { JwtService as JwtService2 } from "@nestjs/jwt";
 var CommonModule = class {
 };
 CommonModule = __decorateClass([
   Module({
     providers: [
       CommonService,
-      { provide: APP_GUARD, useClass: AuthGuard },
-      { provide: APP_GUARD, useClass: RoleGuard }
+      {
+        provide: APP_GUARD,
+        useFactory: () => new AuthGuard(new ConfigService2(), new JwtService2(), new Reflector3())
+      },
+      { provide: APP_GUARD, useFactory: () => new RoleGuard(new Reflector3()) }
     ],
     exports: [CommonService]
   })

@@ -153,14 +153,19 @@ RoleGuard = __decorateClass([
 ], RoleGuard);
 
 // libs/common/src/common.module.ts
+var import_config2 = require("@nestjs/config");
+var import_jwt2 = require("@nestjs/jwt");
 var CommonModule = class {
 };
 CommonModule = __decorateClass([
   (0, import_common6.Module)({
     providers: [
       CommonService,
-      { provide: import_core3.APP_GUARD, useClass: AuthGuard },
-      { provide: import_core3.APP_GUARD, useClass: RoleGuard }
+      {
+        provide: import_core3.APP_GUARD,
+        useFactory: () => new AuthGuard(new import_config2.ConfigService(), new import_jwt2.JwtService(), new import_core3.Reflector())
+      },
+      { provide: import_core3.APP_GUARD, useFactory: () => new RoleGuard(new import_core3.Reflector()) }
     ],
     exports: [CommonService]
   })
