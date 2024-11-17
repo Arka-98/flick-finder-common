@@ -1,5 +1,51 @@
-declare class CommonModule {}
+import * as _nestjs_common from '@nestjs/common';
+import { PipeTransform } from '@nestjs/common';
+import { Request } from 'express';
+import * as bson from 'bson';
 
-declare class CommonService {}
+declare class CommonModule {
+}
 
-export { CommonModule, CommonService };
+declare class CommonService {
+}
+
+declare const IS_PUBLIC = "isPublic";
+/**
+ * Decorator that marks a route as public, disabling authentication checks.
+ */
+declare const Public: () => _nestjs_common.CustomDecorator<string>;
+
+declare enum RolesEnum {
+    ADMIN = "admin",
+    VENDOR = "vendor",
+    CUSTOMER = "customer",
+    EXECUTIVE = "executive"
+}
+
+declare const ROLES_KEY = "roles";
+/**
+ * Decorator to set roles that can access to the decorated controller/action.
+ * Use in combination with the RolesGuard to restrict access to certain roles.
+ * @param roles - One or multiple roles that can access to the decorated controller/action.
+ * @see {@link https://docs.nestjs.com/security/authorization#roles-based-authorization|NestJS - Roles-based authorization}
+ */
+declare const Roles: (...roles: RolesEnum[]) => _nestjs_common.CustomDecorator<string>;
+
+interface CustomRequest extends Request {
+    user?: {
+        sub: string;
+        username: string;
+        role: RolesEnum;
+    };
+}
+
+declare class ParseObjectIdPipe implements PipeTransform {
+    transform(value: string): bson.ObjectId;
+}
+
+declare class UserUtil {
+    static hashPassword(password: string): string[];
+    static comparePassword(password: string, hash: string, salt: string): boolean;
+}
+
+export { CommonModule, CommonService, type CustomRequest, IS_PUBLIC, ParseObjectIdPipe, Public, ROLES_KEY, Roles, RolesEnum, UserUtil };

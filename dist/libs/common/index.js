@@ -1,39 +1,50 @@
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __decorateClass = (decorators, target, key, kind) => {
-  var result =
-    kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
+  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
   for (var i = decorators.length - 1, decorator; i >= 0; i--)
-    if ((decorator = decorators[i]))
-      result =
-        (kind ? decorator(target, key, result) : decorator(result)) || result;
+    if (decorator = decorators[i])
+      result = (kind ? decorator(target, key, result) : decorator(result)) || result;
   if (kind && result) __defProp(target, key, result);
   return result;
 };
 
 // libs/common/src/common.module.ts
-import { Module } from '@nestjs/common';
+import { Module } from "@nestjs/common";
 
 // libs/common/src/common.service.ts
-import { Injectable } from '@nestjs/common';
-var CommonService = class {};
-CommonService = __decorateClass([Injectable()], CommonService);
+import { Injectable } from "@nestjs/common";
+var CommonService = class {
+};
+CommonService = __decorateClass([
+  Injectable()
+], CommonService);
 
 // libs/common/src/common.module.ts
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD } from "@nestjs/core";
 
 // libs/common/src/guards/auth.guard.ts
 import {
   Injectable as Injectable2,
-  UnauthorizedException,
-} from '@nestjs/common';
-import '@nestjs/config';
-import '@nestjs/core';
-import '@nestjs/jwt';
+  UnauthorizedException
+} from "@nestjs/common";
+import "@nestjs/config";
+import "@nestjs/core";
+import "@nestjs/jwt";
+
+// libs/common/src/enums/roles.enum.ts
+var RolesEnum = /* @__PURE__ */ ((RolesEnum6) => {
+  RolesEnum6["ADMIN"] = "admin";
+  RolesEnum6["VENDOR"] = "vendor";
+  RolesEnum6["CUSTOMER"] = "customer";
+  RolesEnum6["EXECUTIVE"] = "executive";
+  return RolesEnum6;
+})(RolesEnum || {});
 
 // libs/common/src/decorators/public.decorator.ts
-import { SetMetadata } from '@nestjs/common';
-var IS_PUBLIC = 'isPublic';
+import { SetMetadata } from "@nestjs/common";
+var IS_PUBLIC = "isPublic";
+var Public = () => SetMetadata(IS_PUBLIC, true);
 
 // libs/common/src/guards/auth.guard.ts
 var AuthGuard = class {
@@ -45,7 +56,7 @@ var AuthGuard = class {
   async canActivate(context) {
     const isPublic = this.reflector.getAllAndOverride(IS_PUBLIC, [
       context.getHandler(),
-      context.getClass(),
+      context.getClass()
     ]);
     if (isPublic) {
       return true;
@@ -56,29 +67,32 @@ var AuthGuard = class {
       throw new UnauthorizedException();
     }
     try {
-      const payload = await this.jwtService.verifyAsync(token, {
-        secret: this.configService.get('JWT_SECRET'),
-      });
-      req['user'] = payload;
+      const payload = await this.jwtService.verifyAsync(token, { secret: this.configService.get("JWT_SECRET") });
+      req["user"] = payload;
     } catch {
       throw new UnauthorizedException();
     }
     return true;
   }
   extractTokenFromHeader(request) {
-    const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    return type === 'Bearer' && token;
+    const [type, token] = request.headers.authorization?.split(" ") ?? [];
+    return type === "Bearer" && token;
   }
 };
-AuthGuard = __decorateClass([Injectable2()], AuthGuard);
+AuthGuard = __decorateClass([
+  Injectable2()
+], AuthGuard);
 
 // libs/common/src/guards/role.guard.ts
-import { Injectable as Injectable3 } from '@nestjs/common';
-import '@nestjs/core';
+import {
+  Injectable as Injectable3
+} from "@nestjs/common";
+import "@nestjs/core";
 
 // libs/common/src/decorators/roles.decorator.ts
-import { SetMetadata as SetMetadata2 } from '@nestjs/common';
-var ROLES_KEY = 'roles';
+import { SetMetadata as SetMetadata2 } from "@nestjs/common";
+var ROLES_KEY = "roles";
+var Roles = (...roles) => SetMetadata2(ROLES_KEY, roles);
 
 // libs/common/src/guards/role.guard.ts
 var RoleGuard = class {
@@ -86,10 +100,10 @@ var RoleGuard = class {
     this.reflector = reflector;
   }
   canActivate(context) {
-    const allowedRoles = this.reflector.getAllAndOverride(ROLES_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
+    const allowedRoles = this.reflector.getAllAndOverride(
+      ROLES_KEY,
+      [context.getHandler(), context.getClass()]
+    );
     const user = context.switchToHttp().getRequest().user;
     if (!allowedRoles || !user) {
       return true;
@@ -97,22 +111,64 @@ var RoleGuard = class {
     return allowedRoles.includes(user.role);
   }
 };
-RoleGuard = __decorateClass([Injectable3()], RoleGuard);
+RoleGuard = __decorateClass([
+  Injectable3()
+], RoleGuard);
 
 // libs/common/src/common.module.ts
-var CommonModule = class {};
-CommonModule = __decorateClass(
-  [
-    Module({
-      providers: [
-        CommonService,
-        { provide: APP_GUARD, useClass: AuthGuard },
-        { provide: APP_GUARD, useClass: RoleGuard },
-      ],
-      exports: [CommonService],
-    }),
-  ],
+var CommonModule = class {
+};
+CommonModule = __decorateClass([
+  Module({
+    providers: [
+      CommonService,
+      { provide: APP_GUARD, useClass: AuthGuard },
+      { provide: APP_GUARD, useClass: RoleGuard }
+    ],
+    exports: [CommonService]
+  })
+], CommonModule);
+
+// libs/common/src/pipes/parse-object-id.pipe.ts
+import {
+  BadRequestException,
+  Injectable as Injectable4
+} from "@nestjs/common";
+import { isValidObjectId, Types } from "mongoose";
+var ParseObjectIdPipe = class {
+  transform(value) {
+    if (!isValidObjectId(value)) {
+      throw new BadRequestException("Invalid ObjectId");
+    }
+    return Types.ObjectId.createFromHexString(value);
+  }
+};
+ParseObjectIdPipe = __decorateClass([
+  Injectable4()
+], ParseObjectIdPipe);
+
+// libs/common/src/utils/user.util.ts
+import crypto from "crypto";
+var UserUtil = class {
+  static hashPassword(password) {
+    const salt = crypto.randomBytes(32).toString("hex");
+    const hash = crypto.pbkdf2Sync(password, salt, 1e3, 64, "sha512").toString("hex");
+    return [hash, salt];
+  }
+  static comparePassword(password, hash, salt) {
+    const hashedPassword = crypto.pbkdf2Sync(password, salt, 1e3, 64, "sha512").toString("hex");
+    return hashedPassword === hash;
+  }
+};
+export {
   CommonModule,
-);
-export { CommonModule, CommonService };
+  CommonService,
+  IS_PUBLIC,
+  ParseObjectIdPipe,
+  Public,
+  ROLES_KEY,
+  Roles,
+  RolesEnum,
+  UserUtil
+};
 //# sourceMappingURL=index.js.map
