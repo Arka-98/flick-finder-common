@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.2.1
+
+### Patch Changes
+
+- 133093b: Add missing exports
+
 ## 1.2.0
 
 ### Minor Changes
