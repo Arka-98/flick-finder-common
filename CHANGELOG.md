@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.2.2
+
+### Patch Changes
+
+- 65fa597: Add missing reflect dependency
+
 ## 1.2.1
 
 ### Patch Changes
