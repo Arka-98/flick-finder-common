@@ -1,6 +1,6 @@
 {
   "name": "@flick-finder/common",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Nest common utilities library for Flick Finder microservices",
   "main": "./dist/libs/common/index.js",
   "keywords": [
@@ -15,7 +15,7 @@
     "check-format": "prettier --check .",
     "check-exports": "attw --pack .",
     "lint": "tsc",
-    "ci": "npm run build && npm run check-exports && npm run lint",
+    "ci": "npm run build && npm run format && npm run check-exports && npm run lint",
     "local-release": "changeset version && changeset publish",
     "prepublishOnly": "npm run ci"
   },

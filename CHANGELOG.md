@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.2.4
+
+### Patch Changes
+
+- fb8ff3a: adds kafka service token
+
 ## 1.2.3
 
 ### Patch Changes
