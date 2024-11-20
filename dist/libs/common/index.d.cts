@@ -48,4 +48,13 @@ declare class UserUtil {
     static comparePassword(password: string, hash: string, salt: string): boolean;
 }
 
-export { CommonModule, CommonService, type CustomRequest, IS_PUBLIC, ParseObjectIdPipe, Public, ROLES_KEY, Roles, RolesEnum, UserUtil };
+declare const TOPICS: {
+    readonly USER: {
+        readonly CREATED: "user.created";
+        readonly UPDATED: "user.updated";
+        readonly DELETED: "user.deleted";
+    };
+};
+declare const KAFKA_SERVICE_TOKEN: "KAFKA_SERVICE";
+
+export { CommonModule, CommonService, type CustomRequest, IS_PUBLIC, KAFKA_SERVICE_TOKEN, ParseObjectIdPipe, Public, ROLES_KEY, Roles, RolesEnum, TOPICS, UserUtil };

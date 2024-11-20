@@ -41,11 +41,13 @@ __export(src_exports, {
   CommonModule: () => CommonModule,
   CommonService: () => CommonService,
   IS_PUBLIC: () => IS_PUBLIC,
+  KAFKA_SERVICE_TOKEN: () => KAFKA_SERVICE_TOKEN,
   ParseObjectIdPipe: () => ParseObjectIdPipe,
   Public: () => Public,
   ROLES_KEY: () => ROLES_KEY,
   Roles: () => Roles,
   RolesEnum: () => RolesEnum,
+  TOPICS: () => TOPICS,
   UserUtil: () => UserUtil
 });
 module.exports = __toCommonJS(src_exports);
@@ -199,16 +201,28 @@ var UserUtil = class {
     return hashedPassword === hash;
   }
 };
+
+// libs/common/src/constants/index.ts
+var TOPICS = {
+  USER: {
+    CREATED: "user.created",
+    UPDATED: "user.updated",
+    DELETED: "user.deleted"
+  }
+};
+var KAFKA_SERVICE_TOKEN = "KAFKA_SERVICE";
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   CommonModule,
   CommonService,
   IS_PUBLIC,
+  KAFKA_SERVICE_TOKEN,
   ParseObjectIdPipe,
   Public,
   ROLES_KEY,
   Roles,
   RolesEnum,
+  TOPICS,
   UserUtil
 });
 //# sourceMappingURL=index.cjs.map

@@ -166,15 +166,27 @@ var UserUtil = class {
     return hashedPassword === hash;
   }
 };
+
+// libs/common/src/constants/index.ts
+var TOPICS = {
+  USER: {
+    CREATED: "user.created",
+    UPDATED: "user.updated",
+    DELETED: "user.deleted"
+  }
+};
+var KAFKA_SERVICE_TOKEN = "KAFKA_SERVICE";
 export {
   CommonModule,
   CommonService,
   IS_PUBLIC,
+  KAFKA_SERVICE_TOKEN,
   ParseObjectIdPipe,
   Public,
   ROLES_KEY,
   Roles,
   RolesEnum,
+  TOPICS,
   UserUtil
 };
 //# sourceMappingURL=index.js.map
