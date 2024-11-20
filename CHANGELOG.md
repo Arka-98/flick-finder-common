@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.2.5
+
+### Patch Changes
+
+- 99eab15: add constants to exports
+
 ## 1.2.4
 
 ### Patch Changes
