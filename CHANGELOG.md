@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.3.0
+
+### Minor Changes
+
+- 34ff116: add kafka module
+
 ## 1.2.5
 
 ### Patch Changes
