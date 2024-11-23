@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.3.1
+
+### Patch Changes
+
+- 1be1ae1: add kafkajs package
+
 ## 1.3.0
 
 ### Minor Changes
