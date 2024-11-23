@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CommonService } from './common.service';
 import { APP_GUARD, Reflector } from '@nestjs/core';
-import { AuthGuard, RoleGuard } from './guards';
+import { AuthGuard, RoleGuard } from '../../guards';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 
