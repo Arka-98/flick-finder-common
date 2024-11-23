@@ -9,10 +9,10 @@ var __decorateClass = (decorators, target, key, kind) => {
   return result;
 };
 
-// libs/common/src/common.module.ts
+// libs/common/src/modules/common/common.module.ts
 import { Module } from "@nestjs/common";
 
-// libs/common/src/common.service.ts
+// libs/common/src/modules/common/common.service.ts
 import { Injectable } from "@nestjs/common";
 var CommonService = class {
 };
@@ -20,7 +20,7 @@ CommonService = __decorateClass([
   Injectable()
 ], CommonService);
 
-// libs/common/src/common.module.ts
+// libs/common/src/modules/common/common.module.ts
 import { APP_GUARD, Reflector as Reflector3 } from "@nestjs/core";
 
 // libs/common/src/guards/auth.guard.ts
@@ -116,7 +116,7 @@ RoleGuard = __decorateClass([
   Injectable3()
 ], RoleGuard);
 
-// libs/common/src/common.module.ts
+// libs/common/src/modules/common/common.module.ts
 import { ConfigService as ConfigService2 } from "@nestjs/config";
 import { JwtService as JwtService2 } from "@nestjs/jwt";
 var CommonModule = class {
@@ -134,6 +134,46 @@ CommonModule = __decorateClass([
     exports: [CommonService]
   })
 ], CommonModule);
+
+// libs/common/src/constants/index.ts
+var TOPICS = {
+  USER: {
+    CREATED: "user.created",
+    UPDATED: "user.updated",
+    DELETED: "user.deleted"
+  }
+};
+var KAFKA_SERVICE_TOKEN = "KAFKA_SERVICE";
+
+// libs/common/src/modules/kafka/kafka.module.ts
+import { Module as Module2 } from "@nestjs/common";
+import { ConfigModule, ConfigService as ConfigService3 } from "@nestjs/config";
+import { ClientsModule, Transport } from "@nestjs/microservices";
+var KafkaModule = class {
+};
+KafkaModule = __decorateClass([
+  Module2({
+    imports: [
+      ClientsModule.registerAsync([
+        {
+          imports: [ConfigModule],
+          name: KAFKA_SERVICE_TOKEN,
+          useFactory: async (configService) => ({
+            transport: Transport.KAFKA,
+            options: {
+              client: {
+                clientId: configService.get("KAFKA_CLIENT_ID"),
+                brokers: [configService.get("KAFKA_BROKER") || "localhost:9092"]
+              }
+            }
+          }),
+          inject: [ConfigService3]
+        }
+      ])
+    ],
+    exports: [ClientsModule]
+  })
+], KafkaModule);
 
 // libs/common/src/pipes/parse-object-id.pipe.ts
 import {
@@ -166,21 +206,12 @@ var UserUtil = class {
     return hashedPassword === hash;
   }
 };
-
-// libs/common/src/constants/index.ts
-var TOPICS = {
-  USER: {
-    CREATED: "user.created",
-    UPDATED: "user.updated",
-    DELETED: "user.deleted"
-  }
-};
-var KAFKA_SERVICE_TOKEN = "KAFKA_SERVICE";
 export {
   CommonModule,
   CommonService,
   IS_PUBLIC,
   KAFKA_SERVICE_TOKEN,
+  KafkaModule,
   ParseObjectIdPipe,
   Public,
   ROLES_KEY,

@@ -9,6 +9,9 @@ declare class CommonModule {
 declare class CommonService {
 }
 
+declare class KafkaModule {
+}
+
 declare const IS_PUBLIC = "isPublic";
 /**
  * Decorator that marks a route as public, disabling authentication checks.
@@ -57,4 +60,4 @@ declare const TOPICS: {
 };
 declare const KAFKA_SERVICE_TOKEN: "KAFKA_SERVICE";
 
-export { CommonModule, CommonService, type CustomRequest, IS_PUBLIC, KAFKA_SERVICE_TOKEN, ParseObjectIdPipe, Public, ROLES_KEY, Roles, RolesEnum, TOPICS, UserUtil };
+export { CommonModule, CommonService, type CustomRequest, IS_PUBLIC, KAFKA_SERVICE_TOKEN, KafkaModule, ParseObjectIdPipe, Public, ROLES_KEY, Roles, RolesEnum, TOPICS, UserUtil };

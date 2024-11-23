@@ -42,6 +42,7 @@ __export(src_exports, {
   CommonService: () => CommonService,
   IS_PUBLIC: () => IS_PUBLIC,
   KAFKA_SERVICE_TOKEN: () => KAFKA_SERVICE_TOKEN,
+  KafkaModule: () => KafkaModule,
   ParseObjectIdPipe: () => ParseObjectIdPipe,
   Public: () => Public,
   ROLES_KEY: () => ROLES_KEY,
@@ -52,10 +53,10 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 
-// libs/common/src/common.module.ts
+// libs/common/src/modules/common/common.module.ts
 var import_common6 = require("@nestjs/common");
 
-// libs/common/src/common.service.ts
+// libs/common/src/modules/common/common.service.ts
 var import_common = require("@nestjs/common");
 var CommonService = class {
 };
@@ -63,7 +64,7 @@ CommonService = __decorateClass([
   (0, import_common.Injectable)()
 ], CommonService);
 
-// libs/common/src/common.module.ts
+// libs/common/src/modules/common/common.module.ts
 var import_core3 = require("@nestjs/core");
 
 // libs/common/src/guards/auth.guard.ts
@@ -154,7 +155,7 @@ RoleGuard = __decorateClass([
   (0, import_common5.Injectable)()
 ], RoleGuard);
 
-// libs/common/src/common.module.ts
+// libs/common/src/modules/common/common.module.ts
 var import_config2 = require("@nestjs/config");
 var import_jwt2 = require("@nestjs/jwt");
 var CommonModule = class {
@@ -173,19 +174,59 @@ CommonModule = __decorateClass([
   })
 ], CommonModule);
 
-// libs/common/src/pipes/parse-object-id.pipe.ts
+// libs/common/src/constants/index.ts
+var TOPICS = {
+  USER: {
+    CREATED: "user.created",
+    UPDATED: "user.updated",
+    DELETED: "user.deleted"
+  }
+};
+var KAFKA_SERVICE_TOKEN = "KAFKA_SERVICE";
+
+// libs/common/src/modules/kafka/kafka.module.ts
 var import_common8 = require("@nestjs/common");
+var import_config3 = require("@nestjs/config");
+var import_microservices = require("@nestjs/microservices");
+var KafkaModule = class {
+};
+KafkaModule = __decorateClass([
+  (0, import_common8.Module)({
+    imports: [
+      import_microservices.ClientsModule.registerAsync([
+        {
+          imports: [import_config3.ConfigModule],
+          name: KAFKA_SERVICE_TOKEN,
+          useFactory: async (configService) => ({
+            transport: import_microservices.Transport.KAFKA,
+            options: {
+              client: {
+                clientId: configService.get("KAFKA_CLIENT_ID"),
+                brokers: [configService.get("KAFKA_BROKER") || "localhost:9092"]
+              }
+            }
+          }),
+          inject: [import_config3.ConfigService]
+        }
+      ])
+    ],
+    exports: [import_microservices.ClientsModule]
+  })
+], KafkaModule);
+
+// libs/common/src/pipes/parse-object-id.pipe.ts
+var import_common9 = require("@nestjs/common");
 var import_mongoose = require("mongoose");
 var ParseObjectIdPipe = class {
   transform(value) {
     if (!(0, import_mongoose.isValidObjectId)(value)) {
-      throw new import_common8.BadRequestException("Invalid ObjectId");
+      throw new import_common9.BadRequestException("Invalid ObjectId");
     }
     return import_mongoose.Types.ObjectId.createFromHexString(value);
   }
 };
 ParseObjectIdPipe = __decorateClass([
-  (0, import_common8.Injectable)()
+  (0, import_common9.Injectable)()
 ], ParseObjectIdPipe);
 
 // libs/common/src/utils/user.util.ts
@@ -201,22 +242,13 @@ var UserUtil = class {
     return hashedPassword === hash;
   }
 };
-
-// libs/common/src/constants/index.ts
-var TOPICS = {
-  USER: {
-    CREATED: "user.created",
-    UPDATED: "user.updated",
-    DELETED: "user.deleted"
-  }
-};
-var KAFKA_SERVICE_TOKEN = "KAFKA_SERVICE";
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   CommonModule,
   CommonService,
   IS_PUBLIC,
   KAFKA_SERVICE_TOKEN,
+  KafkaModule,
   ParseObjectIdPipe,
   Public,
   ROLES_KEY,
