@@ -44,6 +44,7 @@
     "@nestjs/microservices": "^10.4.8",
     "@types/mongoose": "^5.11.97",
     "express": "^4.21.1",
+    "kafkajs": "^2.2.4",
     "mongoose": "^8.8.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
