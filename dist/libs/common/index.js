@@ -270,11 +270,13 @@ export {
   IS_PUBLIC,
   KAFKA_SERVICE_TOKEN,
   KafkaModule,
+  KafkaService,
   ParseObjectIdPipe,
   Public,
   ROLES_KEY,
   Roles,
   RolesEnum,
+  SharedJwtModule,
   TOPICS,
   UserUtil
 };

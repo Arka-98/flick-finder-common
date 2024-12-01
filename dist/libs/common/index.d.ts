@@ -1,3 +1,5 @@
+import { ClientKafka } from '@nestjs/microservices';
+import { KafkaMessage } from 'kafkajs';
 import * as _nestjs_common from '@nestjs/common';
 import { PipeTransform } from '@nestjs/common';
 import { Request } from 'express';
@@ -9,7 +11,26 @@ declare class CommonModule {
 declare class CommonService {
 }
 
+declare class SharedJwtModule {
+}
+
 declare class KafkaModule {
+}
+
+declare const TOPICS: {
+    readonly USER: {
+        readonly CREATED: "user.created";
+        readonly UPDATED: "user.updated";
+        readonly DELETED: "user.deleted";
+    };
+};
+declare const KAFKA_SERVICE_TOKEN: "KAFKA_SERVICE";
+
+declare class KafkaService {
+    private readonly kafkaClient;
+    private readonly logger;
+    constructor(kafkaClient: ClientKafka);
+    emit(topic: (typeof TOPICS)[keyof typeof TOPICS][keyof (typeof TOPICS)[keyof typeof TOPICS]], message: KafkaMessage): void;
 }
 
 declare const IS_PUBLIC = "isPublic";
@@ -51,13 +72,4 @@ declare class UserUtil {
     static comparePassword(password: string, hash: string, salt: string): boolean;
 }
 
-declare const TOPICS: {
-    readonly USER: {
-        readonly CREATED: "user.created";
-        readonly UPDATED: "user.updated";
-        readonly DELETED: "user.deleted";
-    };
-};
-declare const KAFKA_SERVICE_TOKEN: "KAFKA_SERVICE";
-
-export { CommonModule, CommonService, type CustomRequest, IS_PUBLIC, KAFKA_SERVICE_TOKEN, KafkaModule, ParseObjectIdPipe, Public, ROLES_KEY, Roles, RolesEnum, TOPICS, UserUtil };
+export { CommonModule, CommonService, type CustomRequest, IS_PUBLIC, KAFKA_SERVICE_TOKEN, KafkaModule, KafkaService, ParseObjectIdPipe, Public, ROLES_KEY, Roles, RolesEnum, SharedJwtModule, TOPICS, UserUtil };

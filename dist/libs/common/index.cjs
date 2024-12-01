@@ -44,11 +44,13 @@ __export(src_exports, {
   IS_PUBLIC: () => IS_PUBLIC,
   KAFKA_SERVICE_TOKEN: () => KAFKA_SERVICE_TOKEN,
   KafkaModule: () => KafkaModule,
+  KafkaService: () => KafkaService,
   ParseObjectIdPipe: () => ParseObjectIdPipe,
   Public: () => Public,
   ROLES_KEY: () => ROLES_KEY,
   Roles: () => Roles,
   RolesEnum: () => RolesEnum,
+  SharedJwtModule: () => SharedJwtModule,
   TOPICS: () => TOPICS,
   UserUtil: () => UserUtil
 });
@@ -307,11 +309,13 @@ var UserUtil = class {
   IS_PUBLIC,
   KAFKA_SERVICE_TOKEN,
   KafkaModule,
+  KafkaService,
   ParseObjectIdPipe,
   Public,
   ROLES_KEY,
   Roles,
   RolesEnum,
+  SharedJwtModule,
   TOPICS,
   UserUtil
 });
