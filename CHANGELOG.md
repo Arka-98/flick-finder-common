@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.4.2
+
+### Patch Changes
+
+- 24fa417: kafka type changes
+
 ## 1.4.1
 
 ### Patch Changes
