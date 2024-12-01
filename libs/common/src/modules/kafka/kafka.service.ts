@@ -11,9 +11,9 @@ export class KafkaService {
     @Inject(KAFKA_SERVICE_TOKEN) private readonly kafkaClient: ClientKafka,
   ) {}
 
-  emit(
+  emit<T>(
     topic: (typeof TOPICS)[keyof typeof TOPICS][keyof (typeof TOPICS)[keyof typeof TOPICS]],
-    message: CustomKafkaMessage,
+    message: CustomKafkaMessage<T>,
   ) {
     this.kafkaClient.emit(topic, message).subscribe({
       next: () => {
