@@ -1,5 +1,5 @@
 export interface CustomKafkaMessage<T = any> {
-  key: string;
+  key?: string;
   value: T;
-  headers: Record<string, string>;
+  headers?: Record<string, string>;
 }

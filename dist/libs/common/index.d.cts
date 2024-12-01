@@ -41,16 +41,16 @@ interface CustomRequest extends Request {
 }
 
 interface CustomKafkaMessage<T = any> {
-    key: string;
+    key?: string;
     value: T;
-    headers: Record<string, string>;
+    headers?: Record<string, string>;
 }
 
 declare class KafkaService {
     private readonly kafkaClient;
     private readonly logger;
     constructor(kafkaClient: ClientKafka);
-    emit<T>(topic: (typeof TOPICS)[keyof typeof TOPICS][keyof (typeof TOPICS)[keyof typeof TOPICS]], message: CustomKafkaMessage<T>): void;
+    emit<T = any>(topic: (typeof TOPICS)[keyof typeof TOPICS][keyof (typeof TOPICS)[keyof typeof TOPICS]], message: CustomKafkaMessage<T>): void;
 }
 
 declare const IS_PUBLIC = "isPublic";
