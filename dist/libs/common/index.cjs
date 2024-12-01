@@ -54,7 +54,7 @@ __export(src_exports, {
 module.exports = __toCommonJS(src_exports);
 
 // libs/common/src/modules/common/common.module.ts
-var import_common6 = require("@nestjs/common");
+var import_common7 = require("@nestjs/common");
 
 // libs/common/src/modules/common/common.service.ts
 var import_common = require("@nestjs/common");
@@ -156,17 +156,46 @@ RoleGuard = __decorateClass([
 ], RoleGuard);
 
 // libs/common/src/modules/common/common.module.ts
+var import_config3 = require("@nestjs/config");
+var import_jwt3 = require("@nestjs/jwt");
+
+// libs/common/src/modules/jwt/shared-jwt.module.ts
+var import_common6 = require("@nestjs/common");
 var import_config2 = require("@nestjs/config");
 var import_jwt2 = require("@nestjs/jwt");
+var SharedJwtModule = class {
+};
+SharedJwtModule = __decorateClass([
+  (0, import_common6.Module)({
+    imports: [
+      import_jwt2.JwtModule.registerAsync({
+        global: true,
+        imports: [import_config2.ConfigModule],
+        useFactory: async (configService) => ({
+          global: true,
+          secret: configService.get("JWT_SECRET"),
+          signOptions: {
+            expiresIn: "30m"
+          }
+        }),
+        inject: [import_config2.ConfigService]
+      })
+    ],
+    exports: [import_jwt2.JwtModule]
+  })
+], SharedJwtModule);
+
+// libs/common/src/modules/common/common.module.ts
 var CommonModule = class {
 };
 CommonModule = __decorateClass([
-  (0, import_common6.Module)({
+  (0, import_common7.Module)({
+    imports: [SharedJwtModule],
     providers: [
       CommonService,
       {
         provide: import_core3.APP_GUARD,
-        useFactory: () => new AuthGuard(new import_config2.ConfigService(), new import_jwt2.JwtService(), new import_core3.Reflector())
+        useFactory: () => new AuthGuard(new import_config3.ConfigService(), new import_jwt3.JwtService(), new import_core3.Reflector())
       },
       { provide: import_core3.APP_GUARD, useFactory: () => new RoleGuard(new import_core3.Reflector()) }
     ],
@@ -185,17 +214,17 @@ var TOPICS = {
 var KAFKA_SERVICE_TOKEN = "KAFKA_SERVICE";
 
 // libs/common/src/modules/kafka/kafka.module.ts
-var import_common8 = require("@nestjs/common");
-var import_config3 = require("@nestjs/config");
+var import_common9 = require("@nestjs/common");
+var import_config4 = require("@nestjs/config");
 var import_microservices = require("@nestjs/microservices");
 var KafkaModule = class {
 };
 KafkaModule = __decorateClass([
-  (0, import_common8.Module)({
+  (0, import_common9.Module)({
     imports: [
       import_microservices.ClientsModule.registerAsync([
         {
-          imports: [import_config3.ConfigModule],
+          imports: [import_config4.ConfigModule],
           name: KAFKA_SERVICE_TOKEN,
           useFactory: async (configService) => ({
             transport: import_microservices.Transport.KAFKA,
@@ -206,7 +235,7 @@ KafkaModule = __decorateClass([
               }
             }
           }),
-          inject: [import_config3.ConfigService]
+          inject: [import_config4.ConfigService]
         }
       ])
     ],
@@ -215,18 +244,18 @@ KafkaModule = __decorateClass([
 ], KafkaModule);
 
 // libs/common/src/pipes/parse-object-id.pipe.ts
-var import_common9 = require("@nestjs/common");
+var import_common10 = require("@nestjs/common");
 var import_mongoose = require("mongoose");
 var ParseObjectIdPipe = class {
   transform(value) {
     if (!(0, import_mongoose.isValidObjectId)(value)) {
-      throw new import_common9.BadRequestException("Invalid ObjectId");
+      throw new import_common10.BadRequestException("Invalid ObjectId");
     }
     return import_mongoose.Types.ObjectId.createFromHexString(value);
   }
 };
 ParseObjectIdPipe = __decorateClass([
-  (0, import_common9.Injectable)()
+  (0, import_common10.Injectable)()
 ], ParseObjectIdPipe);
 
 // libs/common/src/utils/user.util.ts

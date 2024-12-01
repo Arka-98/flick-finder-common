@@ -4,8 +4,10 @@ import { APP_GUARD, Reflector } from '@nestjs/core';
 import { AuthGuard, RoleGuard } from '../../guards';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { SharedJwtModule } from '../jwt';
 
 @Module({
+  imports: [SharedJwtModule],
   providers: [
     CommonService,
     {

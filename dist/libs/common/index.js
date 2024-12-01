@@ -10,7 +10,7 @@ var __decorateClass = (decorators, target, key, kind) => {
 };
 
 // libs/common/src/modules/common/common.module.ts
-import { Module } from "@nestjs/common";
+import { Module as Module2 } from "@nestjs/common";
 
 // libs/common/src/modules/common/common.service.ts
 import { Injectable } from "@nestjs/common";
@@ -117,17 +117,46 @@ RoleGuard = __decorateClass([
 ], RoleGuard);
 
 // libs/common/src/modules/common/common.module.ts
-import { ConfigService as ConfigService2 } from "@nestjs/config";
+import { ConfigService as ConfigService3 } from "@nestjs/config";
 import { JwtService as JwtService2 } from "@nestjs/jwt";
+
+// libs/common/src/modules/jwt/shared-jwt.module.ts
+import { Module } from "@nestjs/common";
+import { ConfigModule, ConfigService as ConfigService2 } from "@nestjs/config";
+import { JwtModule } from "@nestjs/jwt";
+var SharedJwtModule = class {
+};
+SharedJwtModule = __decorateClass([
+  Module({
+    imports: [
+      JwtModule.registerAsync({
+        global: true,
+        imports: [ConfigModule],
+        useFactory: async (configService) => ({
+          global: true,
+          secret: configService.get("JWT_SECRET"),
+          signOptions: {
+            expiresIn: "30m"
+          }
+        }),
+        inject: [ConfigService2]
+      })
+    ],
+    exports: [JwtModule]
+  })
+], SharedJwtModule);
+
+// libs/common/src/modules/common/common.module.ts
 var CommonModule = class {
 };
 CommonModule = __decorateClass([
-  Module({
+  Module2({
+    imports: [SharedJwtModule],
     providers: [
       CommonService,
       {
         provide: APP_GUARD,
-        useFactory: () => new AuthGuard(new ConfigService2(), new JwtService2(), new Reflector3())
+        useFactory: () => new AuthGuard(new ConfigService3(), new JwtService2(), new Reflector3())
       },
       { provide: APP_GUARD, useFactory: () => new RoleGuard(new Reflector3()) }
     ],
@@ -146,17 +175,17 @@ var TOPICS = {
 var KAFKA_SERVICE_TOKEN = "KAFKA_SERVICE";
 
 // libs/common/src/modules/kafka/kafka.module.ts
-import { Module as Module2 } from "@nestjs/common";
-import { ConfigModule, ConfigService as ConfigService3 } from "@nestjs/config";
+import { Module as Module3 } from "@nestjs/common";
+import { ConfigModule as ConfigModule2, ConfigService as ConfigService4 } from "@nestjs/config";
 import { ClientsModule, Transport } from "@nestjs/microservices";
 var KafkaModule = class {
 };
 KafkaModule = __decorateClass([
-  Module2({
+  Module3({
     imports: [
       ClientsModule.registerAsync([
         {
-          imports: [ConfigModule],
+          imports: [ConfigModule2],
           name: KAFKA_SERVICE_TOKEN,
           useFactory: async (configService) => ({
             transport: Transport.KAFKA,
@@ -167,7 +196,7 @@ KafkaModule = __decorateClass([
               }
             }
           }),
-          inject: [ConfigService3]
+          inject: [ConfigService4]
         }
       ])
     ],
