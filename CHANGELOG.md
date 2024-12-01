@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.4.4
+
+### Patch Changes
+
+- a4619cc: fix kafka type issues
+
 ## 1.4.3
 
 ### Patch Changes
