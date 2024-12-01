@@ -8,6 +8,7 @@ var __decorateClass = (decorators, target, key, kind) => {
   if (kind && result) __defProp(target, key, result);
   return result;
 };
+var __decorateParam = (index, decorator) => (target, key) => decorator(target, key, index);
 
 // libs/common/src/modules/common/common.module.ts
 import { Module as Module2 } from "@nestjs/common";
@@ -178,6 +179,33 @@ var KAFKA_SERVICE_TOKEN = "KAFKA_SERVICE";
 import { Module as Module3 } from "@nestjs/common";
 import { ConfigModule as ConfigModule2, ConfigService as ConfigService4 } from "@nestjs/config";
 import { ClientsModule, Transport } from "@nestjs/microservices";
+
+// libs/common/src/modules/kafka/kafka.service.ts
+import { Inject, Injectable as Injectable4, Logger } from "@nestjs/common";
+var KafkaService = class {
+  constructor(kafkaClient) {
+    this.kafkaClient = kafkaClient;
+  }
+  logger = new Logger(KafkaService.name);
+  emit(topic, message) {
+    this.kafkaClient.emit(topic, message).subscribe({
+      next: () => {
+        this.logger.log(`Event published to kafka topic ${topic}`);
+      },
+      error: (err) => {
+        this.logger.error(
+          `Error publishing event to kafka topic ${topic}: ${err}`
+        );
+      }
+    });
+  }
+};
+KafkaService = __decorateClass([
+  Injectable4(),
+  __decorateParam(0, Inject(KAFKA_SERVICE_TOKEN))
+], KafkaService);
+
+// libs/common/src/modules/kafka/kafka.module.ts
 var KafkaModule = class {
 };
 KafkaModule = __decorateClass([
@@ -200,14 +228,15 @@ KafkaModule = __decorateClass([
         }
       ])
     ],
-    exports: [ClientsModule]
+    providers: [KafkaService],
+    exports: [ClientsModule, KafkaService]
   })
 ], KafkaModule);
 
 // libs/common/src/pipes/parse-object-id.pipe.ts
 import {
   BadRequestException,
-  Injectable as Injectable4
+  Injectable as Injectable5
 } from "@nestjs/common";
 import { isValidObjectId, Types } from "mongoose";
 var ParseObjectIdPipe = class {
@@ -219,7 +248,7 @@ var ParseObjectIdPipe = class {
   }
 };
 ParseObjectIdPipe = __decorateClass([
-  Injectable4()
+  Injectable5()
 ], ParseObjectIdPipe);
 
 // libs/common/src/utils/user.util.ts

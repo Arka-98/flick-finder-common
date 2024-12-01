@@ -34,6 +34,7 @@ var __decorateClass = (decorators, target, key, kind) => {
   if (kind && result) __defProp(target, key, result);
   return result;
 };
+var __decorateParam = (index, decorator) => (target, key) => decorator(target, key, index);
 
 // libs/common/src/index.ts
 var src_exports = {};
@@ -214,13 +215,40 @@ var TOPICS = {
 var KAFKA_SERVICE_TOKEN = "KAFKA_SERVICE";
 
 // libs/common/src/modules/kafka/kafka.module.ts
-var import_common9 = require("@nestjs/common");
+var import_common10 = require("@nestjs/common");
 var import_config4 = require("@nestjs/config");
 var import_microservices = require("@nestjs/microservices");
+
+// libs/common/src/modules/kafka/kafka.service.ts
+var import_common9 = require("@nestjs/common");
+var KafkaService = class {
+  constructor(kafkaClient) {
+    this.kafkaClient = kafkaClient;
+  }
+  logger = new import_common9.Logger(KafkaService.name);
+  emit(topic, message) {
+    this.kafkaClient.emit(topic, message).subscribe({
+      next: () => {
+        this.logger.log(`Event published to kafka topic ${topic}`);
+      },
+      error: (err) => {
+        this.logger.error(
+          `Error publishing event to kafka topic ${topic}: ${err}`
+        );
+      }
+    });
+  }
+};
+KafkaService = __decorateClass([
+  (0, import_common9.Injectable)(),
+  __decorateParam(0, (0, import_common9.Inject)(KAFKA_SERVICE_TOKEN))
+], KafkaService);
+
+// libs/common/src/modules/kafka/kafka.module.ts
 var KafkaModule = class {
 };
 KafkaModule = __decorateClass([
-  (0, import_common9.Module)({
+  (0, import_common10.Module)({
     imports: [
       import_microservices.ClientsModule.registerAsync([
         {
@@ -239,23 +267,24 @@ KafkaModule = __decorateClass([
         }
       ])
     ],
-    exports: [import_microservices.ClientsModule]
+    providers: [KafkaService],
+    exports: [import_microservices.ClientsModule, KafkaService]
   })
 ], KafkaModule);
 
 // libs/common/src/pipes/parse-object-id.pipe.ts
-var import_common10 = require("@nestjs/common");
+var import_common11 = require("@nestjs/common");
 var import_mongoose = require("mongoose");
 var ParseObjectIdPipe = class {
   transform(value) {
     if (!(0, import_mongoose.isValidObjectId)(value)) {
-      throw new import_common10.BadRequestException("Invalid ObjectId");
+      throw new import_common11.BadRequestException("Invalid ObjectId");
     }
     return import_mongoose.Types.ObjectId.createFromHexString(value);
   }
 };
 ParseObjectIdPipe = __decorateClass([
-  (0, import_common10.Injectable)()
+  (0, import_common11.Injectable)()
 ], ParseObjectIdPipe);
 
 // libs/common/src/utils/user.util.ts
