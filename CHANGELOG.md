@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.4.1
+
+### Patch Changes
+
+- 7c189c8: adds kafka service
+
 ## 1.4.0
 
 ### Minor Changes
