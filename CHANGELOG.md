@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.4.0
+
+### Minor Changes
+
+- 846f5a1: add shared jwt module
+
 ## 1.3.1
 
 ### Patch Changes
