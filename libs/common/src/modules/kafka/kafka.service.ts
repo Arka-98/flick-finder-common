@@ -1,7 +1,7 @@
 import { KAFKA_SERVICE_TOKEN, TOPICS } from '@app/common/constants';
+import type { CustomKafkaMessage } from '@app/common/interfaces';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import type { ClientKafka } from '@nestjs/microservices';
-import type { KafkaMessage } from 'kafkajs';
 
 @Injectable()
 export class KafkaService {
@@ -13,7 +13,7 @@ export class KafkaService {
 
   emit(
     topic: (typeof TOPICS)[keyof typeof TOPICS][keyof (typeof TOPICS)[keyof typeof TOPICS]],
-    message: KafkaMessage,
+    message: CustomKafkaMessage,
   ) {
     this.kafkaClient.emit(topic, message).subscribe({
       next: () => {

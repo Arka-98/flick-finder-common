@@ -1,5 +1,4 @@
 import { ClientKafka } from '@nestjs/microservices';
-import { KafkaMessage } from 'kafkajs';
 import * as _nestjs_common from '@nestjs/common';
 import { PipeTransform } from '@nestjs/common';
 import { Request } from 'express';
@@ -26,11 +25,32 @@ declare const TOPICS: {
 };
 declare const KAFKA_SERVICE_TOKEN: "KAFKA_SERVICE";
 
+declare enum RolesEnum {
+    ADMIN = "admin",
+    VENDOR = "vendor",
+    CUSTOMER = "customer",
+    EXECUTIVE = "executive"
+}
+
+interface CustomRequest extends Request {
+    user?: {
+        sub: string;
+        username: string;
+        role: RolesEnum;
+    };
+}
+
+interface CustomKafkaMessage {
+    key: string;
+    value: string;
+    headers: Record<string, string>;
+}
+
 declare class KafkaService {
     private readonly kafkaClient;
     private readonly logger;
     constructor(kafkaClient: ClientKafka);
-    emit(topic: (typeof TOPICS)[keyof typeof TOPICS][keyof (typeof TOPICS)[keyof typeof TOPICS]], message: KafkaMessage): void;
+    emit(topic: (typeof TOPICS)[keyof typeof TOPICS][keyof (typeof TOPICS)[keyof typeof TOPICS]], message: CustomKafkaMessage): void;
 }
 
 declare const IS_PUBLIC = "isPublic";
@@ -38,13 +58,6 @@ declare const IS_PUBLIC = "isPublic";
  * Decorator that marks a route as public, disabling authentication checks.
  */
 declare const Public: () => _nestjs_common.CustomDecorator<string>;
-
-declare enum RolesEnum {
-    ADMIN = "admin",
-    VENDOR = "vendor",
-    CUSTOMER = "customer",
-    EXECUTIVE = "executive"
-}
 
 declare const ROLES_KEY = "roles";
 /**
@@ -55,14 +68,6 @@ declare const ROLES_KEY = "roles";
  */
 declare const Roles: (...roles: RolesEnum[]) => _nestjs_common.CustomDecorator<string>;
 
-interface CustomRequest extends Request {
-    user?: {
-        sub: string;
-        username: string;
-        role: RolesEnum;
-    };
-}
-
 declare class ParseObjectIdPipe implements PipeTransform {
     transform(value: string): bson.ObjectId;
 }
@@ -72,4 +77,4 @@ declare class UserUtil {
     static comparePassword(password: string, hash: string, salt: string): boolean;
 }
 
-export { CommonModule, CommonService, type CustomRequest, IS_PUBLIC, KAFKA_SERVICE_TOKEN, KafkaModule, KafkaService, ParseObjectIdPipe, Public, ROLES_KEY, Roles, RolesEnum, SharedJwtModule, TOPICS, UserUtil };
+export { CommonModule, CommonService, type CustomKafkaMessage, type CustomRequest, IS_PUBLIC, KAFKA_SERVICE_TOKEN, KafkaModule, KafkaService, ParseObjectIdPipe, Public, ROLES_KEY, Roles, RolesEnum, SharedJwtModule, TOPICS, UserUtil };
