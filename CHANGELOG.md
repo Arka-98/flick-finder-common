@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.4.3
+
+### Patch Changes
+
+- bec68b3: kafka type issues fix
+
 ## 1.4.2
 
 ### Patch Changes
