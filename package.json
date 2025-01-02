@@ -1,6 +1,6 @@
 {
   "name": "@flick-finder/common",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Nest common utilities library for Flick Finder microservices",
   "main": "./dist/libs/common/index.js",
   "keywords": [
@@ -42,6 +42,7 @@
     "@nestjs/core": "^10.4.7",
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/microservices": "^10.4.8",
+    "@nestjs/swagger": "^8.1.0",
     "@types/mongoose": "^5.11.97",
     "express": "^4.21.1",
     "kafkajs": "^2.2.4",

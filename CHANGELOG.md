@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.4.5
+
+### Patch Changes
+
+- a8f6722: adds custom user interface
+
 ## 1.4.4
 
 ### Patch Changes
