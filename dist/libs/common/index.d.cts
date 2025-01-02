@@ -46,6 +46,18 @@ interface CustomKafkaMessage<T = any> {
     headers?: Record<string, string>;
 }
 
+interface IUser {
+    name: string;
+    email: string;
+    phone: number;
+    dob: Date;
+    role: RolesEnum;
+    password: string;
+    emailVerified: boolean;
+    phoneVerified: boolean;
+    blocked?: boolean;
+}
+
 declare class KafkaService {
     private readonly kafkaClient;
     private readonly logger;
@@ -77,4 +89,4 @@ declare class UserUtil {
     static comparePassword(password: string, hash: string, salt: string): boolean;
 }
 
-export { CommonModule, CommonService, type CustomKafkaMessage, type CustomRequest, IS_PUBLIC, KAFKA_SERVICE_TOKEN, KafkaModule, KafkaService, ParseObjectIdPipe, Public, ROLES_KEY, Roles, RolesEnum, SharedJwtModule, TOPICS, UserUtil };
+export { CommonModule, CommonService, type CustomKafkaMessage, type CustomRequest, IS_PUBLIC, type IUser, KAFKA_SERVICE_TOKEN, KafkaModule, KafkaService, ParseObjectIdPipe, Public, ROLES_KEY, Roles, RolesEnum, SharedJwtModule, TOPICS, UserUtil };

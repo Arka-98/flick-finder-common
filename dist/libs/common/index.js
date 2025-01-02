@@ -215,7 +215,7 @@ KafkaModule = __decorateClass([
         {
           imports: [ConfigModule2],
           name: KAFKA_SERVICE_TOKEN,
-          useFactory: async (configService) => ({
+          useFactory: (configService) => ({
             transport: Transport.KAFKA,
             options: {
               client: {

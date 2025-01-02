@@ -10,7 +10,7 @@ import { KafkaService } from './kafka.service';
       {
         imports: [ConfigModule],
         name: KAFKA_SERVICE_TOKEN,
-        useFactory: async (configService: ConfigService) => ({
+        useFactory: (configService: ConfigService) => ({
           transport: Transport.KAFKA,
           options: {
             client: {
