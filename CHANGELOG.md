@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.4.6
+
+### Patch Changes
+
+- 551382d: adds common id and timestamp dto
+
 ## 1.4.5
 
 ### Patch Changes
