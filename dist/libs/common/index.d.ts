@@ -89,4 +89,10 @@ declare class UserUtil {
     static comparePassword(password: string, hash: string, salt: string): boolean;
 }
 
-export { CommonModule, CommonService, type CustomKafkaMessage, type CustomRequest, IS_PUBLIC, type IUser, KAFKA_SERVICE_TOKEN, KafkaModule, KafkaService, ParseObjectIdPipe, Public, ROLES_KEY, Roles, RolesEnum, SharedJwtModule, TOPICS, UserUtil };
+declare class IdAndTimestampDto {
+    _id: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export { CommonModule, CommonService, type CustomKafkaMessage, type CustomRequest, IS_PUBLIC, type IUser, IdAndTimestampDto, KAFKA_SERVICE_TOKEN, KafkaModule, KafkaService, ParseObjectIdPipe, Public, ROLES_KEY, Roles, RolesEnum, SharedJwtModule, TOPICS, UserUtil };

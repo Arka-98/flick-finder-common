@@ -17,6 +17,8 @@
     "noImplicitOverride": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "strictNullChecks": false,
     "baseUrl": "./",
     "paths": {
       "@app/common": ["libs/common/src"],
