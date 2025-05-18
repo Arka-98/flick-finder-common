@@ -3,7 +3,7 @@ import type { RolesEnum } from '../enums';
 export interface IUser {
   name: string;
   email: string;
-  phone: number;
+  phone: string;
   dob: Date;
   role: RolesEnum;
   password: string;

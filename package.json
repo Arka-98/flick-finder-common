@@ -57,5 +57,6 @@
       "import": "./dist/libs/common/index.js",
       "default": "./dist/libs/common/index.cjs"
     }
-  }
+  },
+  "types": "./dist/libs/common/index.d.ts"
 }
