@@ -1,6 +1,6 @@
 {
   "name": "@flick-finder/common",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "Nest common utilities library for Flick Finder microservices",
   "main": "./dist/libs/common/index.js",
   "keywords": [
@@ -17,7 +17,8 @@
     "lint": "tsc",
     "ci": "npm run build && npm run format && npm run check-exports && npm run lint",
     "local-release": "changeset version && changeset publish",
-    "prepublishOnly": "npm run ci"
+    "prepublishOnly": "npm run ci",
+    "local:link": "npm run build && npm link"
   },
   "repository": {
     "type": "git",

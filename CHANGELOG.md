@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.4.7
+
+### Patch Changes
+
+- 8aaba4f: fix: change phone type to string in IUser
+
 ## 1.4.6
 
 ### Patch Changes
