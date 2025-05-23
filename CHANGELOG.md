@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.5.0
+
+### Minor Changes
+
+- 648952f: adds common middleware with logger middleware
+
 ## 1.4.7
 
 ### Patch Changes
