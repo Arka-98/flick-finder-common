@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.6.0
+
+### Minor Changes
+
+- fc6c610: fix: adds object util
+
 ## 1.5.0
 
 ### Minor Changes
