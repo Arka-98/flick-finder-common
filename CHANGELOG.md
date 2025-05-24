@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.6.1
+
+### Patch Changes
+
+- ec91f7a: fix: update kafka user event
+
 ## 1.6.0
 
 ### Minor Changes
