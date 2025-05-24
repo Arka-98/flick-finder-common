@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.6.2
+
+### Patch Changes
+
+- cd55a1b: fix: adds user event dto
+
 ## 1.6.1
 
 ### Patch Changes
