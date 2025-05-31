@@ -1,8 +1,2 @@
-export const TOPICS = {
-  USER: {
-    CREATED: 'user.created',
-    UPDATED: 'user.updated',
-    DELETED: 'user.deleted',
-  },
-} as const;
-export const KAFKA_SERVICE_TOKEN = 'KAFKA_SERVICE' as const;
+export * from './kafka-service-token.constant';
+export * from './kafka-topics.constant';
