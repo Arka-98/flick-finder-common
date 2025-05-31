@@ -18,7 +18,8 @@
     "ci": "npm run build && npm run format && npm run check-exports && npm run lint",
     "local-release": "changeset version && changeset publish",
     "prepublishOnly": "npm run ci",
-    "local:link": "npm run build && npm link"
+    "local:link": "npm run build && npm link",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "@arethetypeswrong/cli": "^0.16.4",
     "@changesets/cli": "^2.27.9",
     "@types/express": "^5.0.0",
+    "husky": "^9.1.7",
     "prettier": "^3.3.3",
     "ts-loader": "^9.5.1",
     "tsup": "^8.3.5",
