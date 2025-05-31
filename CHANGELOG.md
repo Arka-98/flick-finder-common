@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.7.3
+
+### Patch Changes
+
+- 68d069e: fix: adds kafka events to exports
+
 ## 1.7.2
 
 ### Patch Changes
