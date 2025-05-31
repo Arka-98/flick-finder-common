@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.7.4
+
+### Patch Changes
+
+- dd3e8b4: fix: adds seat pricing kafka event
+
 ## 1.7.3
 
 ### Patch Changes
