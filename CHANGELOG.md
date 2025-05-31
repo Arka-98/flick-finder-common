@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.7.2
+
+### Patch Changes
+
+- 322900e: fix: lint fixes
+
 ## 1.7.1
 
 ### Patch Changes
