@@ -1,4 +1,4 @@
-import type { RolesEnum } from '../enums';
+import type { RolesEnum } from '../../enums';
 
 export interface IUserEvent {
   _id: string;
