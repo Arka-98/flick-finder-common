@@ -29,6 +29,11 @@ export const TOPICS = {
     UPDATED: 'seat-type.updated',
     DELETED: 'seat-type.deleted',
   },
+  SEAT_PRICING: {
+    CREATED: 'seat-pricing.created',
+    UPDATED: 'seat-pricing.updated',
+    DELETED: 'seat-pricing.deleted',
+  },
   SHOWTIME: {
     CREATED: 'showtime.created',
     UPDATED: 'showtime.updated',
