@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.7.0
+
+### Minor Changes
+
+- 7ac7eba: feat: adds required kafka topics and refactors
+
 ## 1.6.2
 
 ### Patch Changes
