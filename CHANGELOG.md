@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.8.0
+
+### Minor Changes
+
+- be35f8d: feat: adds duration to movie kafka event interface
+
 ## 1.7.4
 
 ### Patch Changes
