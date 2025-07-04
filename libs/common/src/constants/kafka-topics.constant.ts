@@ -39,4 +39,7 @@ export const TOPICS = {
     UPDATED: 'showtime.updated',
     DELETED: 'showtime.deleted',
   },
+  BOOKING_EVENT: {
+    CREATED: 'booking-event.created',
+  },
 } as const;
