@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.8.1
+
+### Patch Changes
+
+- 5edad2b: fix: refactor kafka emit to be async
+
 ## 1.8.0
 
 ### Minor Changes
