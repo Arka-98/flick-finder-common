@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.10.0
+
+### Minor Changes
+
+- 5984fb6: feat: adds microservice options as a constant
+
 ## 1.9.0
 
 ### Minor Changes
