@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.11.0
+
+### Minor Changes
+
+- 1467434: fix: kafka service emit topic type inference fix
+
 ## 1.10.0
 
 ### Minor Changes
