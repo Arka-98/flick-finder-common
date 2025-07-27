@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 1.11.1
+
+### Patch Changes
+
+- 6d1a569: feat: update seat event interface
+
 ## 1.11.0
 
 ### Minor Changes
