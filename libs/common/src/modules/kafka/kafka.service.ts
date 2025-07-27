@@ -1,4 +1,7 @@
-import { KAFKA_SERVICE_TOKEN, TOPICS } from '@app/common/constants';
+import {
+  KAFKA_SERVICE_TOKEN,
+  type TopicEventType,
+} from '@app/common/constants';
 import type { CustomKafkaMessage } from '@app/common/interfaces';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import type { ClientKafka } from '@nestjs/microservices';
@@ -12,10 +15,7 @@ export class KafkaService {
     @Inject(KAFKA_SERVICE_TOKEN) private readonly kafkaClient: ClientKafka,
   ) {}
 
-  async emit<T = any>(
-    topic: (typeof TOPICS)[keyof typeof TOPICS][keyof (typeof TOPICS)[keyof typeof TOPICS]],
-    message: CustomKafkaMessage<T>,
-  ) {
+  async emit<T = never>(topic: TopicEventType, message: CustomKafkaMessage<T>) {
     try {
       await lastValueFrom(this.kafkaClient.emit(topic, message));
 

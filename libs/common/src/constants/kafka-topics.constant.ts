@@ -1,3 +1,5 @@
+import type { NestedValues } from '../helpers';
+
 export const TOPICS = {
   USER: {
     CREATED: 'user.created',
@@ -43,3 +45,4 @@ export const TOPICS = {
     CREATED: 'booking-event.created',
   },
 } as const;
+export type TopicEventType = NestedValues<typeof TOPICS>;
