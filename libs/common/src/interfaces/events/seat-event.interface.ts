@@ -1,6 +1,6 @@
 export interface ISeatEvent {
   _id: string;
-  rowLabel: string;
+  seatLabel: string;
   seatType: string;
   hall: string;
 }
