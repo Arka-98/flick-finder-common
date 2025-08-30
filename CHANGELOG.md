@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 2.0.0
+
+### Major Changes
+
+- afb6119: feat: adds StripeModule and update CommonModule to use dynamic module technique
+
 ## 1.11.1
 
 ### Patch Changes
