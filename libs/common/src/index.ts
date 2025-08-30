@@ -8,3 +8,4 @@ export * from './constants';
 export * from './dto';
 export * from './middlewares';
 export * from './helpers';
+export * from './guards';

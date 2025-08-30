@@ -1,22 +1,24 @@
-import { Module } from '@nestjs/common';
-import { CommonService } from './common.service';
+import { Module, type DynamicModule } from '@nestjs/common';
 import { APP_GUARD, Reflector } from '@nestjs/core';
 import { AuthGuard, RoleGuard } from '../../guards';
-import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
+import { ConfigModule, type ConfigModuleOptions } from '@nestjs/config';
 import { SharedJwtModule } from '../jwt';
 
-@Module({
-  imports: [SharedJwtModule],
-  providers: [
-    CommonService,
-    {
-      provide: APP_GUARD,
-      useFactory: () =>
-        new AuthGuard(new ConfigService(), new JwtService(), new Reflector()),
-    },
-    { provide: APP_GUARD, useFactory: () => new RoleGuard(new Reflector()) },
-  ],
-  exports: [CommonService],
-})
-export class CommonModule {}
+@Module({})
+export class CommonModule {
+  static register(options?: ConfigModuleOptions): DynamicModule {
+    return {
+      module: CommonModule,
+      imports: [SharedJwtModule, ConfigModule.forRoot(options)],
+      providers: [
+        Reflector,
+        {
+          provide: APP_GUARD,
+          useClass: AuthGuard,
+        },
+        { provide: APP_GUARD, useClass: RoleGuard },
+      ],
+      exports: [ConfigModule],
+    };
+  }
+}
