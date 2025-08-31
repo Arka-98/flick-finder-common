@@ -9,7 +9,10 @@ export class CommonModule {
   static register(options?: ConfigModuleOptions): DynamicModule {
     return {
       module: CommonModule,
-      imports: [SharedJwtModule, ConfigModule.forRoot(options)],
+      imports: [
+        SharedJwtModule,
+        ConfigModule.forRoot({ isGlobal: true, ...options }),
+      ],
       providers: [
         Reflector,
         {
