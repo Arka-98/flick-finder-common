@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 2.0.1
+
+### Patch Changes
+
+- 5b15a5d: fix: config module dependency fix
+
 ## 2.0.0
 
 ### Major Changes
