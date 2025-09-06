@@ -4,15 +4,15 @@ import Stripe from 'stripe';
 
 @Injectable()
 export class StripeService {
-  private stripe: Stripe;
   private readonly loggerService = new Logger(StripeService.name);
+  public instance: Stripe;
 
   constructor(private readonly configService: ConfigService) {
-    this.stripe = new Stripe(this.configService.get('STRIPE_API_KEY'));
+    this.instance = new Stripe(this.configService.get('STRIPE_API_KEY'));
   }
 
   async createProduct(productDetails: Stripe.ProductCreateParams) {
-    const product = await this.stripe.products.create(productDetails);
+    const product = await this.instance.products.create(productDetails);
 
     this.loggerService.debug(
       `Product created with name ${product.name} and ID ${product.id}`,
@@ -22,7 +22,7 @@ export class StripeService {
   }
 
   async createPrice(priceDetails: Stripe.PriceCreateParams) {
-    const price = await this.stripe.prices.create(priceDetails);
+    const price = await this.instance.prices.create(priceDetails);
 
     this.loggerService.debug(
       `Price created for product ID ${priceDetails.product}`,
@@ -49,7 +49,7 @@ export class StripeService {
     successUrl: string,
     cancelUrl: string,
   ) {
-    const checkout = await this.stripe.checkout.sessions.create({
+    const checkout = await this.instance.checkout.sessions.create({
       mode: 'payment',
       line_items: lineItems,
       success_url: successUrl,
@@ -68,7 +68,7 @@ export class StripeService {
     stripeSignature: string,
     endpointSecret: string,
   ) {
-    const event = await this.stripe.webhooks.constructEventAsync(
+    const event = await this.instance.webhooks.constructEventAsync(
       payload,
       stripeSignature,
       endpointSecret,
