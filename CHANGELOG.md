@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 2.1.1
+
+### Patch Changes
+
+- 9a9f815: fix: chalk default export
+
 ## 2.1.0
 
 ### Minor Changes
