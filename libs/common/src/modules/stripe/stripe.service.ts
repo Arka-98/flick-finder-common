@@ -63,6 +63,24 @@ export class StripeService {
     return checkout;
   }
 
+  async retrieveCheckoutSession(
+    sessionId: string,
+    params?: Stripe.Checkout.SessionRetrieveParams,
+    options?: Stripe.RequestOptions,
+  ) {
+    const session = await this.instance.checkout.sessions.retrieve(
+      sessionId,
+      params,
+      options,
+    );
+
+    this.loggerService.debug(
+      `Checkout session retrieved with ID ${session.id}`,
+    );
+
+    return session;
+  }
+
   async verifyAndConstructEvent(
     payload: Buffer,
     stripeSignature: string,
