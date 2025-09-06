@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 2.1.2
+
+### Patch Changes
+
+- ca95ad0: fix: debug chalk issue
+
 ## 2.1.1
 
 ### Patch Changes
