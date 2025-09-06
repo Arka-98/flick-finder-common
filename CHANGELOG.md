@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 2.1.3
+
+### Patch Changes
+
+- 0c37a4f: fix: removes console from logger debug
+
 ## 2.1.2
 
 ### Patch Changes
