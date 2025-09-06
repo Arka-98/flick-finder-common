@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 2.1.4
+
+### Patch Changes
+
+- e981e14: fix: make stripe instance available publicly
+
 ## 2.1.3
 
 ### Patch Changes
