@@ -1,6 +1,6 @@
 {
   "name": "@flick-finder/common",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Nest common utilities library for Flick Finder microservices",
   "main": "./dist/libs/common/index.js",
   "keywords": [
