@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 2.1.5
+
+### Patch Changes
+
+- bac3c79: fix: adds retrieve checkout session method in stripe service
+
 ## 2.1.4
 
 ### Patch Changes
