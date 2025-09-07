@@ -48,12 +48,14 @@ export class StripeService {
     lineItems: Stripe.Checkout.SessionCreateParams.LineItem[],
     successUrl: string,
     cancelUrl: string,
+    metadata = {},
   ) {
     const checkout = await this.instance.checkout.sessions.create({
       mode: 'payment',
       line_items: lineItems,
       success_url: successUrl,
       cancel_url: cancelUrl,
+      metadata,
     });
 
     this.loggerService.debug(
