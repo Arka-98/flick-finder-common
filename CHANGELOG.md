@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 2.1.7
+
+### Patch Changes
+
+- 7f3407a: fix: support paymentIntentData in stripe create checkout session service method
+
 ## 2.1.6
 
 ### Patch Changes
