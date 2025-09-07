@@ -49,6 +49,7 @@ export class StripeService {
     successUrl: string,
     cancelUrl: string,
     metadata = {},
+    paymentIntentData?: Stripe.Checkout.SessionCreateParams.PaymentIntentData,
   ) {
     const checkout = await this.instance.checkout.sessions.create({
       mode: 'payment',
@@ -56,6 +57,7 @@ export class StripeService {
       success_url: successUrl,
       cancel_url: cancelUrl,
       metadata,
+      payment_intent_data: paymentIntentData,
     });
 
     this.loggerService.debug(
