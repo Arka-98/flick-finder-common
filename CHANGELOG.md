@@ -1,5 +1,11 @@
 # @flick-finder/common
 
+## 2.1.6
+
+### Patch Changes
+
+- 388ad78: fix: support metadata in stripe service create checkout session
+
 ## 2.1.5
 
 ### Patch Changes
